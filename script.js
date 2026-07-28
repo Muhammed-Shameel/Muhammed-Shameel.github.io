@@ -83,8 +83,8 @@ revealEls.forEach(el => revealObserver.observe(el));
 // ---- TYPING ANIMATION ----
 const roles = [
   'Junior Data Scientist',
-  'Machine Learning Engineer',
-  'AI/ML Developer',
+  'Junior Machine Learning Engineer',
+  'Junior AI Engineer',
 ];
 
 let roleIndex = 0;
@@ -131,48 +131,6 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     window.scrollTo({ top, behavior: 'smooth' });
   });
 });
-
-// ---- CURSOR TRAIL (desktop only) ----
-if (window.innerWidth > 768) {
-  const trail = [];
-  const TRAIL_LENGTH = 8;
-
-  for (let i = 0; i < TRAIL_LENGTH; i++) {
-    const dot = document.createElement('div');
-    dot.style.cssText = `
-      position:fixed;pointer-events:none;z-index:9999;
-      width:${6 - i * 0.5}px;height:${6 - i * 0.5}px;
-      border-radius:50%;
-      background:rgba(56,189,248,${0.6 - i * 0.07});
-      transition:transform 0.1s;
-      top:0;left:0;
-      transform:translate(-50%,-50%);
-    `;
-    document.body.appendChild(dot);
-    trail.push({ el: dot, x: 0, y: 0 });
-  }
-
-  let mouseX = 0, mouseY = 0;
-  document.addEventListener('mousemove', e => {
-    mouseX = e.clientX;
-    mouseY = e.clientY;
-  });
-
-  function animateTrail() {
-    let lx = mouseX, ly = mouseY;
-    trail.forEach((t, i) => {
-      const speed = 0.25 - i * 0.02;
-      t.x += (lx - t.x) * speed;
-      t.y += (ly - t.y) * speed;
-      t.el.style.left = t.x + 'px';
-      t.el.style.top = t.y + 'px';
-      lx = t.x;
-      ly = t.y;
-    });
-    requestAnimationFrame(animateTrail);
-  }
-  animateTrail();
-}
 
 // ---- CARD TILT (projects) ----
 document.querySelectorAll('.project-card').forEach(card => {
